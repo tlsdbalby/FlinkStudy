@@ -10,16 +10,16 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 public class TransformTest2_RollingAggregation {
     public static void main(String[] args) throws Exception {
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        env.setParallelism(1);
+            StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+            env.setParallelism(1);
 
-        DataStream<String> inputStream = env.readTextFile("D:\\JetBrains\\IntelliJ WorkSpace\\FlinkStudy\\src\\main\\resources\\Sensor.txt");
+            DataStream<String> inputStream = env.readTextFile("D:\\JetBrains\\IntelliJ WorkSpace\\FlinkStudy\\src\\main\\resources\\Sensor.txt");
 
-        //转化成SensorReading类型 使用Lambda表达式简化书写
-        DataStream<SensorReading> dataStream = inputStream.map( line -> {
-            String[] strings = line.split(",");
-            return new SensorReading(strings[0].trim(), Long.parseLong(strings[1].trim()), Double.parseDouble(strings[2].trim()));
-        } );
+            //转化成SensorReading类型 使用Lambda表达式简化书写
+            DataStream<SensorReading> dataStream = inputStream.map( line -> {
+                String[] strings = line.split(",");
+                return new SensorReading(strings[0].trim(), Long.parseLong(strings[1].trim()), Double.parseDouble(strings[2].trim()));
+            } );
 
         /*
         * keyby() 的参数:
